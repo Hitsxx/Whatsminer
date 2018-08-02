@@ -1,0 +1,8 @@
+Package: luci-lib-ip
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc, liblua, libnl-tiny
+Source: feeds/luci/libs/luci-lib-ip
+Section: luci
+Architecture: zynq
+Installed-Size: 9352
+Description:  Lua library for IP calculation and routing information

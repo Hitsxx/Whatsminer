@@ -1,0 +1,10 @@
+Package: kmod-ip6tables
+Version: 4.4.14-1
+Depends: kernel (=4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c), kmod-nf-ipt6, kmod-ipt-core, kmod-ipt-conntrack
+Source: package/kernel/linux
+License: GPLv2
+Section: kernel
+Status: unknown hold not-installed
+Architecture: zynq
+Installed-Size: 8685
+Description:  Netfilter IPv6 firewalling support

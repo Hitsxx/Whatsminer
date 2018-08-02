@@ -1,0 +1,23 @@
+1. Whatsminer upgrade package contains below files:
+
+   - remote-upgrade.sh: upgrade script.
+   - upgrade-whatsminer-$MACHINE_TYPE-$VERSION_NUMBER.tgz: upgrade package.
+   - HOWTO: this file.
+
+2. First prepare your Miners IP list file ip.txt (one IP each line).
+
+   $ cat ip.txt
+   192.168.1.10
+   192.168.1.11
+   ..
+   192.168.0.100
+   192.168.0.101
+
+3. Then run remote-upgrade.sh to upgrade the specified miners.
+
+  $ ./remote-upgrade.sh upgrade-whatsminer-$MACHINE_TYPE-$VERSION_NUMBER.tgz ip.txt
+
+  This command will upgrade miners specified in ip.txt automatically.
+  After one miner finishes the upgrade, the miner will reboot automatically.
+
+  Enjoy it!

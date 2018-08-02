@@ -1,0 +1,9 @@
+Package: firewall
+Version: 2016-11-06-1
+Depends: libc, libubox, libubus, libuci, libip4tc, libip6tc, libxtables, kmod-ipt-core, kmod-ipt-conntrack, kmod-ipt-nat
+Source: package/network/config/firewall
+License: ISC
+Section: net
+Architecture: zynq
+Installed-Size: 38917
+Description:  This package provides a config-compatible C implementation of the UCI firewall.

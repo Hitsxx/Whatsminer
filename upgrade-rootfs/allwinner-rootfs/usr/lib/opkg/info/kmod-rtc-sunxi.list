@@ -1,0 +1,2 @@
+/lib/modules/4.4.14/rtc-sunxi.ko
+/etc/modules.d/50-rtc-sunxi

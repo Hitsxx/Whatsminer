@@ -1,0 +1,11 @@
+Package: uboot-zynq-zed
+Version: 2016.07
+Depends: libc
+Source: package/boot/uboot-zynq
+License: GPL-2.0 GPL-2.0+
+LicenseFiles: Licenses/README
+Section: boot
+Maintainer: Jason Wu <jason.wu.misc@gmail.com>
+Architecture: zynq
+Installed-Size: 105
+Description:  U-Boot 2016.07 for Avnet Digilent ZedBoard Dev Board

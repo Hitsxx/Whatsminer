@@ -1,0 +1,10 @@
+Package: jshn
+Version: 2016-11-29-77a629375d7387a33a59509d9d751a8798134cab
+Depends: libc, libjson-c, libubox, libblobmsg-json
+Source: package/libs/libubox
+License: ISC
+Section: utils
+Maintainer: Felix Fietkau <nbd@nbd.name>
+Architecture: sunxi
+Installed-Size: 5164
+Description:  Library for parsing and generating JSON from shell scripts

@@ -1,0 +1,12 @@
+Package: px5g
+Version: 4
+Depends: libc, libpolarssl
+Source: package/utils/px5g
+License: LGPL-2.1
+Section: utils
+Maintainer: Jo-Philipp Wich <jow@openwrt.org>
+Architecture: zynq
+Installed-Size: 3545
+Description:  Px5g is a tiny standalone X.509 certificate generator.
+ It suitable to create key files and certificates in DER
+ and PEM format for use with stunnel, uhttpd and others.

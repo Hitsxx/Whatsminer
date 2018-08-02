@@ -1,0 +1,10 @@
+Package: cgminer
+Version: git-d68b257-1
+Depends: libc, libcurl, libpthread, jansson, udev
+Source: feeds/cgminer/cgminer
+Section: utils
+Architecture: zynq
+Installed-Size: 126740
+Description:  Cgminer is a multi-threaded multi-pool GPU, FPGA and CPU miner with ATI GPU
+ monitoring, (over)clocking and fanspeed support for bitcoin and derivative
+ coins. Do not use on multiple block chains at the same time!

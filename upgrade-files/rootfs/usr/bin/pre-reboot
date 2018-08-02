@@ -1,0 +1,61 @@
+#!/bin/sh
+#
+# Script to perform operations before reboot, called by lua.
+#
+
+delete_lines_from_file() {
+    local filename=$1
+    local total_lines
+    local delete_lines
+    total_lines=`cat $filename | wc -l`
+    delete_lines=`expr $total_lines / 10`
+    sed -i "1,${delete_lines}d" $filename
+}
+
+file_size() {
+    local filename=$1
+    local size=0
+    if [ "$filename" != "" ] && [ -f $filename ]; then
+        size=`du -k $filename | cut -f1`
+    fi
+    echo $size
+}
+
+delete_file_if_too_large() {
+    local file=$1
+    local size=$(file_size $file)
+    if [ "$size" -gt 2048 ]; then
+        rm -f $file
+    fi
+}
+
+limit_one_or_two_files_less_than_2MB() {
+    local log_file=$1
+    local tmp_file=$2
+    local total_size=`expr $(file_size $log_file) + $(file_size $tmp_file)`
+    while [ "$total_size" -gt 2048 ]; do
+        delete_lines_from_file $log_file
+        total_size=`expr $(file_size $log_file) + $(file_size $tmp_file)`
+    done
+}
+
+# Append /data/logs/miner-state.log with /tmp/miner-state.log
+state_log_file=/data/logs/miner-state.log
+tmp_log_file=/tmp/miner-state.log
+if [ -f $tmp_log_file ]; then
+    time=`date`
+    echo "Reboot at $time" >> $tmp_log_file
+    delete_file_if_too_large $state_log_file
+    limit_one_or_two_files_less_than_2MB $tmp_log_file
+    limit_one_or_two_files_less_than_2MB $state_log_file $tmp_log_file
+    cat $tmp_log_file >> $state_log_file
+    rm -f $tmp_log_file
+fi
+
+# reboot or sync may be blocked under some conditions
+# so we call 'reboot -n -f' background to force rebooting
+# after sleep timeout
+sleep 10 && reboot -n -f &
+
+sync
+mount /dev/root -o remount,ro >/dev/null 2>&1

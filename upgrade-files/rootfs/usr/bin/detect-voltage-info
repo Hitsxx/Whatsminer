@@ -1,0 +1,100 @@
+#!/bin/sh
+#
+# Script to detect voltage info. Info will be output to file /tmp/voltage-info. (Used by remote-daemon)
+#
+# Output format:
+#
+# [MINER_TYPE]_[MINER_VERSION],[POWER_VERSION],[POWER_VALUE_IN_CONFIG_FILE],[FREQ_VALUE_IN_CONFIG_FILE],[POWER_VALUE_IN_RUNNING],[GHsav]
+#
+# e.g.
+#
+# m3_v20,000107,17,618,15,15100
+#
+
+# Output info
+OUTPUT_FILENAME="/tmp/voltage-info"
+
+show_voltage_info() {
+    echo -n "Detected Voltage Info: "
+    cat $OUTPUT_FILENAME
+    echo ""
+}
+
+#
+# Detect voltage info
+#
+
+# miner_type & miner_version
+/usr/bin/detect-miner-info
+minerinfo=`cat /tmp/miner-info`
+
+miner_type=`echo $minerinfo | cut -d "-" -f2 | tr A-Z a-z`
+
+hb_version=`echo $minerinfo | cut -d "-" -f5`
+version_num=`echo ${hb_version##*HB}`
+major_version_num=`expr substr "$version_num" 1 1`
+miner_version="v""$major_version_num""0"  # Force vnx to vn0, e.g.: v23 -> v20
+
+# power_version
+pvstr=`readpower | grep "Read power version ="` # e.g.: "Read power version = d0 00 00 00 01 07"
+pvstr=`echo $pvstr | cut -d "=" -f2` # " d0 00 00 00 01 07"
+power_version=`echo $pvstr | cut -d " " -f4``echo $pvstr | cut -d " " -f5``echo $pvstr | cut -d " " -f6` # "000107"
+
+if [ "$power_version" = "" ]; then
+    miner_info=`detect-miner-info`
+
+    p=`echo $miner_info | grep "\-P1\-"`
+    if [ "$p" != "" ]; then
+        power_version="000004"
+    fi
+
+    p=`echo $miner_info | grep "\-P2\-"`
+    if [ "$p" != "" ]; then
+        power_version="000105"
+    fi
+
+    p=`echo $miner_info | grep "\-P3\-"`
+    if [ "$p" != "" ]; then
+        power_version="000106"
+    fi
+
+    p=`echo $miner_info | grep "\-P5\-"`
+    if [ "$p" != "" ]; then
+        power_version="000107"
+    fi
+
+    p=`echo $miner_info | grep "\-P6\-"`
+    if [ "$p" != "" ]; then
+        power_version="000022"
+    fi
+fi
+
+if [ "$power_version" != "" ]; then
+    # power_config_val,freq_config_val
+    configline=`grep $power_version /etc/config/powers`  # "list 'power_limit' '4:000107:17:618:618:618:1:11329:10649:10196:600:7:1:6'"
+    configline=`echo $configline | cut -d " " -f3`       # "'4:000107:17:618:618:618:1:11329:10649:10196:600:7:1:6'"
+    power_config_val=`echo $configline | cut -d ":" -f3`
+    freq_config_val=`echo $configline | cut -d ":" -f4`
+fi
+
+# power_running_val
+cgminerapisummary=`cgminer-api -o summary`
+str=`echo ${cgminerapisummary##*Voltage=}`
+power_running_val=`echo $str | cut -d "," -f1`
+
+# ghsav
+str=`echo ${cgminerapisummary##*MHS av=}`
+mhsav=`echo $str | cut -d "," -f1`
+mhsav=`echo $mhsav | cut -d "." -f1`
+ghsav=`expr $mhsav / 1000`
+
+# Output to $OUTPUT_FILENAME
+echo -n "$miner_type" > $OUTPUT_FILENAME
+echo -n "_$miner_version" >> $OUTPUT_FILENAME
+echo -n ",$power_version" >> $OUTPUT_FILENAME
+echo -n ",$power_config_val" >> $OUTPUT_FILENAME
+echo -n ",$freq_config_val" >> $OUTPUT_FILENAME
+echo -n ",$power_running_val" >> $OUTPUT_FILENAME
+echo -n ",$ghsav" >> $OUTPUT_FILENAME
+
+show_voltage_info

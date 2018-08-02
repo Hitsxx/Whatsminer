@@ -1,0 +1,8 @@
+Package: luci-i18n-diag-core-zh-cn
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc, luci-app-diag-core
+Source: feeds/luci/applications/luci-app-diag-core
+Section: luci
+Architecture: all
+Installed-Size: 669
+Description:  Translation for luci-app-diag-core - 普通话 (Chinese)

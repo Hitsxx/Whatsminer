@@ -1,0 +1,7 @@
+DISTRIB_ID='OpenWrt'
+DISTRIB_RELEASE='Bleeding Edge'
+DISTRIB_REVISION='49994'
+DISTRIB_CODENAME='designated_driver'
+DISTRIB_TARGET='zynq/generic'
+DISTRIB_DESCRIPTION='OpenWrt Designated Driver 49994'
+DISTRIB_TAINTS='no-all'

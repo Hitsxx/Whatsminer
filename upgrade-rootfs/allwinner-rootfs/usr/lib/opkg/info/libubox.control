@@ -1,0 +1,10 @@
+Package: libubox
+Version: 2016-11-29-77a629375d7387a33a59509d9d751a8798134cab
+Depends: libc
+Source: package/libs/libubox
+License: ISC
+Section: libs
+Maintainer: Felix Fietkau <nbd@nbd.name>
+Architecture: sunxi
+Installed-Size: 17141
+Description:  Basic utility library

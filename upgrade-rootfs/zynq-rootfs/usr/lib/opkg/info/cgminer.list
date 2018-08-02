@@ -1,0 +1,6 @@
+/usr/bin/cgminer
+/etc/config/cgminer
+/usr/bin/cgminer-monitor
+/usr/bin/cgminer-api
+/etc/init.d/cgminer
+/usr/bin/mmupgrade

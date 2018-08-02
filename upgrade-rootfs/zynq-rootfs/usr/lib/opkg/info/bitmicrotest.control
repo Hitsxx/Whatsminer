@@ -1,0 +1,10 @@
+Package: bitmicrotest
+Version: 2017-02-17
+Depends: libc
+Source: package/bitmicrotest
+License: LGPL-2.1
+Section: utils
+Maintainer: caiqinghua <caiqinghua@gmail.com>
+Architecture: zynq
+Installed-Size: 10115
+Description:  BitMicro Chip Test

@@ -1,0 +1,8 @@
+Package: luci-i18n-base-zh-cn
+Version: git-17.136.70777-41d604f-1
+Depends: libc, luci-base
+Source: feeds/luci/modules/luci-base
+Section: luci
+Architecture: all
+Installed-Size: 27435
+Description:  Translation for luci-base - 中文 (Chinese)

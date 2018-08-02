@@ -1,0 +1,8 @@
+Package: luci-i18n-firewall-zh-cn
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc, luci-app-firewall
+Source: feeds/luci/applications/luci-app-firewall
+Section: luci
+Architecture: all
+Installed-Size: 3878
+Description:  Translation for luci-app-firewall - 普通话 (Chinese)

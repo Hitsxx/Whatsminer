@@ -1,0 +1,10 @@
+Package: libustream-openssl
+Version: 2016-07-02-ec80adaa1b47f28d426fa19c692011ce60b992d6
+Depends: libc, libubox, libopenssl
+Source: package/libs/ustream-ssl
+License: ISC
+Section: libs
+Maintainer: Felix Fietkau <nbd@nbd.name>
+Architecture: zynq
+Installed-Size: 3299
+Description:  ustream SSL Library (openssl)

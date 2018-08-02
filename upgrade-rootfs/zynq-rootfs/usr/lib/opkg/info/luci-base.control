@@ -1,0 +1,8 @@
+Package: luci-base
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc, lua, libuci-lua, luci-lib-nixio, luci-lib-ip, rpcd, libubus-lua, luci-lib-jsonc
+Source: feeds/luci/modules/luci-base
+Section: luci
+Architecture: zynq
+Installed-Size: 124214
+Description:  LuCI core libraries

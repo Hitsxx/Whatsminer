@@ -1,0 +1,10 @@
+Package: libudev
+Version: 3.2-1
+Depends: libc
+Source: feeds/packages/utils/eudev
+License: GPL-2.0
+Section: libs
+Maintainer: Daniel Golle <daniel@makrotopia.org>
+Architecture: sunxi
+Installed-Size: 53223
+Description:  Dynamic device management subsystem

@@ -1,0 +1,10 @@
+Package: kmod-nf-nat
+Version: 4.4.14-1
+Depends: kernel (=4.4.14-1-b21dd1185327708512a5574868efc878), kmod-nf-conntrack, kmod-nf-ipt
+Source: package/kernel/linux
+License: GPLv2
+Section: kernel
+Status: unknown hold not-installed
+Architecture: sunxi
+Installed-Size: 11511
+Description:  Netfilter NAT

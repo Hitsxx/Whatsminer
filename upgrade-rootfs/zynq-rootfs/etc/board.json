@@ -1,0 +1,12 @@
+{
+	"model": {
+		"id": "xlnx,zynq-zed",
+		"name": "Zynq Zed Development Board"
+	},
+	"network": {
+		"lan": {
+			"ifname": "eth0",
+			"protocol": "static"
+		}
+	}
+}

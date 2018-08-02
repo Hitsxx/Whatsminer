@@ -1,0 +1,174 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2006-2011 OpenWrt.org
+
+START=10
+STOP=98
+
+is_allwinner_platform=false
+
+chr() {
+	port_char=`expr $1 + 65`
+	printf "\\$(printf %o "$port_char")"
+}
+
+pin_name() {
+	pin=$1
+	port=`expr $pin / 32`
+	no=`expr $pin % 32`
+	echo "P$(chr $port)$no"
+}
+
+recovery_kernel_if_needed() {
+	boot_from_recovery=`cat /proc/cmdline | grep boot_part=recovery`
+	if [ "$boot_from_recovery" != "" ]; then
+		if [ -e /dev/nandc ]; then
+			kernel_dev=/dev/nandc
+		else
+			kernel_dev=/dev/mmcblk0p6
+		fi
+		cat /root/kernel.fex > $kernel_dev
+	fi
+}
+
+do_for_allwinner() {
+	if [ "${CONTROL_BOARD_PLATFORM:0:9}" != "ALLWINNER" ]; then
+		return
+	fi
+
+	is_allwinner_platform=true
+
+	# enable pull of hash power enable pins for board type detection
+	hash_en_pin0=$(pin_name $HASH_ENABLE_PIN0)
+	hash_en_pin1=$(pin_name $HASH_ENABLE_PIN1)
+	hash_en_pin2=$(pin_name $HASH_ENABLE_PIN2)
+
+	echo "$hash_en_pin0 1" > /sys/kernel/debug/sunxi_pinctrl/pull
+	echo "$hash_en_pin1 1" > /sys/kernel/debug/sunxi_pinctrl/pull
+	echo "$hash_en_pin2 1" > /sys/kernel/debug/sunxi_pinctrl/pull
+
+	if [ -f /etc/mac ]; then
+		mac_detected_in_sst=`cat /proc/cmdline | grep mac_addr=c0`
+		if [ "$mac_detected_in_sst" = "" ]; then
+			mac0=`cat /etc/mac`
+			/usr/bin/securezone -w mac $mac0
+			ifconfig eth0 hw ether $mac0
+		fi
+		rm /etc/mac
+	fi
+
+	recovery_kernel_if_needed
+
+	if [ -f /usr/bin/watchdog ]; then
+		/usr/bin/watchdog &
+	fi
+}
+
+init_led() {
+	echo $RED_LED_PIN > /sys/class/gpio/export
+	echo out > /sys/class/gpio/gpio$RED_LED_PIN/direction
+	echo 0 > /sys/class/gpio/gpio$RED_LED_PIN/value
+
+	echo $GREEN_LED_PIN > /sys/class/gpio/export
+	echo out > /sys/class/gpio/gpio$GREEN_LED_PIN/direction
+	echo 1 > /sys/class/gpio/gpio$GREEN_LED_PIN/value
+}
+
+set_reset_directions() {
+	echo $HASH_RESET_PIN0 > /sys/class/gpio/export
+	echo out > /sys/class/gpio/gpio$HASH_RESET_PIN0/direction
+	echo 0 > /sys/class/gpio/gpio$HASH_RESET_PIN0/value
+
+	echo $HASH_RESET_PIN1 > /sys/class/gpio/export
+	echo out > /sys/class/gpio/gpio$HASH_RESET_PIN1/direction
+	echo 0 > /sys/class/gpio/gpio$HASH_RESET_PIN1/value
+
+	echo $HASH_RESET_PIN2 > /sys/class/gpio/export
+	echo out > /sys/class/gpio/gpio$HASH_RESET_PIN2/direction
+	echo 0 > /sys/class/gpio/gpio$HASH_RESET_PIN2/value
+}
+
+set_plug_directions() {
+	echo $HASH_PLUG_PIN0 > /sys/class/gpio/export
+	echo in > /sys/class/gpio/gpio$HASH_PLUG_PIN0/direction
+
+	echo $HASH_PLUG_PIN1 > /sys/class/gpio/export
+	echo in > /sys/class/gpio/gpio$HASH_PLUG_PIN1/direction
+
+	echo $HASH_PLUG_PIN2 > /sys/class/gpio/export
+	echo in > /sys/class/gpio/gpio$HASH_PLUG_PIN2/direction
+}
+
+set_en_directions() {
+	echo $HASH_ENABLE_PIN0 > /sys/class/gpio/export
+	echo in > /sys/class/gpio/gpio$HASH_ENABLE_PIN0/direction
+	echo $HASH_ENABLE_PIN1 > /sys/class/gpio/export
+	echo in > /sys/class/gpio/gpio$HASH_ENABLE_PIN1/direction
+	echo $HASH_ENABLE_PIN2 > /sys/class/gpio/export
+	echo in > /sys/class/gpio/gpio$HASH_ENABLE_PIN2/direction
+}
+
+uci_apply_defaults() {
+	. /lib/functions/system.sh
+
+	cd /etc/uci-defaults || return 0
+	files="$(ls)"
+	[ -z "$files" ] && return 0
+	mkdir -p /tmp/.uci
+	for file in $files; do
+		( . "./$(basename $file)" ) && rm -f "$file"
+	done
+	uci commit
+}
+
+prepare_logs_partition() {
+    mkdir -p /data/logs/
+
+	if [ "$is_allwinner_platform" = true ]; then
+        e2fsck -y /dev/nandh
+        mount -o data=journal -t ext4 /dev/nandh /data/logs
+        if [ "$?" != "0" ]; then
+            mke2fs -t ext4 -j -F /dev/nandh
+            mount -o data=journal -t ext4 /dev/nandh /data/logs
+        fi
+    fi
+}
+
+boot() {
+	[ -f /proc/mounts ] || /sbin/mount_root
+	[ -f /proc/jffs2_bbc ] && echo "S" > /proc/jffs2_bbc
+	[ -f /proc/net/vlan/config ] && vconfig set_name_type DEV_PLUS_VID_NO_PAD
+
+	mkdir -p /var/run
+	mkdir -p /var/log
+	mkdir -p /var/lock
+	mkdir -p /var/state
+	mkdir -p /var/tmp
+	mkdir -p /tmp/.uci
+	chmod 0700 /tmp/.uci
+	touch /var/log/wtmp
+	touch /var/log/lastlog
+	touch /tmp/resolv.conf.auto
+	ln -sf /tmp/resolv.conf.auto /tmp/resolv.conf
+	grep -q debugfs /proc/filesystems && /bin/mount -o noatime -t debugfs debugfs /sys/kernel/debug
+	[ "$FAILSAFE" = "true" ] && touch /tmp/.failsafe
+
+	/bin/board_detect
+	uci_apply_defaults
+
+	do_for_allwinner
+	set_reset_directions
+	set_plug_directions
+	set_en_directions
+	init_led
+
+    prepare_logs_partition
+
+	# temporary hack until configd exists
+	/sbin/reload_config
+
+	# create /dev/root if it doesn't exist
+	[ -e /dev/root -o -h /dev/root ] || {
+		rootdev=$(awk 'BEGIN { RS=" "; FS="="; } $1 == "root" { print $2 }' < /proc/cmdline)
+		[ -n "$rootdev" ] && ln -s "$rootdev" /dev/root
+	}
+}

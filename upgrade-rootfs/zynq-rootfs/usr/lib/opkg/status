@@ -1,0 +1,799 @@
+Package: terminfo
+Version: 5.9-3
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libuci-lua
+Version: 2016-07-04.1-1
+Depends: libc, libuci, liblua
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: libc
+Version: 1.1.15-1
+Depends: libgcc
+Status: install hold installed
+Essential: yes
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: opkg
+Version: 9c97d5ecd795709c8584e972bfdf3aee3a5b846d-12
+Depends: libc, uclient-fetch
+Status: install user installed
+Architecture: zynq
+Conffiles:
+ /etc/opkg.conf b73c0a02cb7bc300b2e6c7c29e8e6d38bdb6ded314319e89be3b352f59fff5ab
+ /etc/opkg/customfeeds.conf 61d1f3aa62fe977614ed0c2f0ad3b2ee2f7b451bfb34812071d86d31a4d43d4a
+Installed-Time: 1479035641
+
+Package: libpthread
+Version: 1.1.15-1
+Depends: libgcc
+Status: install hold installed
+Essential: yes
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: ubus
+Version: 2016-07-02-053be7df871e05478284235732f8b0608089512f
+Depends: libc, libubus, libblobmsg-json, ubusd
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: rpcd
+Version: 2016-06-30-23417e94d25570e6d62542bac46edd51e8e0243a
+Depends: libc, libubus, libubox, libuci, libblobmsg-json
+Status: install user installed
+Architecture: zynq
+Conffiles:
+ /etc/config/rpcd 9f58e09bb250fe6cee61c873ff2c1a19cb800d12cef0773bd5dfc47e0d01c90b
+Installed-Time: 1479035641
+
+Package: busybox
+Version: 1.24.2-1
+Depends: libc
+Status: install user installed
+Essential: yes
+Architecture: zynq
+Installed-Time: 1486639449
+
+Package: libsysfs
+Version: 2.1.0-2
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1498188836
+
+Package: luci-lib-ip
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc, liblua, libnl-tiny
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libubus-lua
+Version: 2016-07-02-053be7df871e05478284235732f8b0608089512f
+Depends: libc, libubus, liblua
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: libiwinfo-lua
+Version: 2016-01-25-e4aca3910dff532ed878d0ceaf1ab6e8ad7719bf
+Depends: libc, libiwinfo, liblua
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: libiwinfo
+Version: 2016-01-25-e4aca3910dff532ed878d0ceaf1ab6e8ad7719bf
+Depends: libc, libuci
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libcurl
+Version: 7.50.0-1
+Depends: libc, libpolarssl
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: kmod-lib-crc-ccitt
+Version: 4.4.14-1
+Depends: kernel (= 4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c)
+Status: install hold installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: luci-theme-bootstrap
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc
+Status: install user installed
+Architecture: all
+Installed-Time: 1479035641
+
+Package: kmod-pppoe
+Version: 4.4.14-1
+Depends: kernel (= 4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c), kmod-ppp, kmod-pppox
+Status: install hold installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: sysfsutils
+Version: 2.1.0-2
+Depends: libc, libsysfs
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1498188836
+
+Package: kmod-pppox
+Version: 4.4.14-1
+Depends: kernel (= 4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c), kmod-ppp
+Status: install hold installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: kmod-ipt-conntrack
+Version: 4.4.14-1
+Depends: kernel (= 4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c), kmod-ipt-core, kmod-nf-conntrack
+Status: install hold installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: base-files
+Version: 169-49994
+Depends: libc, netifd, procd, jsonfilter, usign, fstools
+Status: install user installed
+Architecture: zynq
+Conffiles:
+ /etc/config/system 6b4367dac1ad309fbaa9f8161c221d581664cf57e08d5f5ee5146fd44e81173d
+ /etc/hosts c1a978d90673437b35fa9494e0a54294062c152bb653d490b718052ab88447fd
+ /etc/inittab 8b395f7d827753e1e92d4a1c369d9fe16caa23bf742b3f78e4599c4dd9b1b6e3
+ /etc/group 35b63adf31591ac37358e918a5e8d4f9c1d541c681a07861cdf1119106c0dd2e
+ /etc/passwd 6a451aa33393f47ade89b8bce4d9711818c2630394c3967265ffed276bb25a55
+ /etc/shadow ccbbfeee2dd560403fea13f7f431ebd21d9bb4b3d41e48e892013fa451f91cc4
+ /etc/profile cf122b05597393cca7f5e1e1700cc47c6d11fbb1a22089bef72654a0b524687d
+ /etc/protocols 7d551355d5540b07b9d86e623cbbc4abecbb94d2a662b3afcc917940eb0e3d52
+ /etc/services 47f3393d265c8cefc2d1ec72f8b0b02cde883ea45266e35f62ff4715208db6ed
+ /etc/shells 8b35ce73c18161a7d7ed16fa244410993bd031515260e3e0c11749047df48d0a
+ /etc/sysctl.conf 427dedc19aa6bfb2e9d5c59d9aa0af8445eeaf484cc3df29063d0ba68726e967
+ /etc/rc.local 515018aa94eb4937dade12dc0d69890b352af35a5ab5fb8203f9ed10990ac06f
+ /etc/sysupgrade.conf 9e87b05fe2f12c84d1c465b396322748479f64bc40e5bab061887f0bd95020a6
+ /etc/config/system 6b4367dac1ad309fbaa9f8161c221d581664cf57e08d5f5ee5146fd44e81173d
+ /etc/sysctl.d/local.conf 43cedc0217825c00cb1a3d49e7be43c06f70257593fb4d6d393f645e04d512de
+ /etc/sysctl.d/local.conf 43cedc0217825c00cb1a3d49e7be43c06f70257593fb4d6d393f645e04d512de
+ /etc/iproute2/rt_tables f771e2b81741f70e3faf658dc504f0dc048672fc8caaadea15e46c35da3de8f8
+Installed-Time: 1479035641
+
+Package: kmod-nf-nat
+Version: 4.4.14-1
+Depends: kernel (= 4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c), kmod-nf-conntrack, kmod-nf-ipt
+Status: install hold installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: cgminer
+Version: git-d68b257-1
+Depends: libc, libcurl, libpthread, jansson, udev
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1487333278
+
+Package: netifd
+Version: 2016-06-06-99e6dc68bbac5a57a0ebca810a9dc36e38667821
+Depends: libc, libuci, libnl-tiny, libubus, ubus, ubusd, jshn, libubox
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: uboot-envtools
+Version: 2015.10-1
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: procd
+Version: 2016-07-29-2c9f5d4af1559b840c42f1443ede9f9fe809c58b
+Depends: libc, ubusd, ubus, libjson-script, ubox, libubox, libubus
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libblkid
+Version: 2.28-1
+Depends: libc, libuuid
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: ubusd
+Version: 2016-07-02-053be7df871e05478284235732f8b0608089512f
+Depends: libc, libubox, libblobmsg-json
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libustream-openssl
+Version: 2016-07-02-ec80adaa1b47f28d426fa19c692011ce60b992d6
+Depends: libc, libubox, libopenssl
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: jansson
+Version: 2.7-1
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libsensors
+Version: 3.3.5-3
+Depends: libc, sysfsutils
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1498188836
+
+Package: libudev
+Version: 3.2-1
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: firewall
+Version: 2016-11-06-1
+Depends: libc, libubox, libubus, libuci, libip4tc, libip6tc, libxtables, kmod-ipt-core, kmod-ipt-conntrack, kmod-ipt-nat
+Status: install user installed
+Architecture: zynq
+Conffiles:
+ /etc/config/firewall 390db1708e76edac2345cb598fd222a855b14557c4c31fe79df387c0ca6b4690
+ /etc/firewall.user bd68324966481011f5e36570258ad97dd422655c16f3119d48325ed8459de510
+Installed-Time: 1479035641
+
+Package: luci-app-firewall
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc, firewall
+Status: install user installed
+Architecture: all
+Installed-Time: 1479035641
+
+Package: kmod-nf-ipt
+Version: 4.4.14-1
+Depends: kernel (= 4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c)
+Status: install hold installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libuci
+Version: 2016-07-04.1-1
+Depends: libc, libubox
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: liblua
+Version: 5.1.5-1
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libip4tc
+Version: 1.4.21-2
+Depends: libc, libxtables
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: kmod-ip6tables
+Version: 4.4.14-1
+Depends: kernel (= 4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c), kmod-nf-ipt6, kmod-ipt-core, kmod-ipt-conntrack
+Status: install hold installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: odhcp6c
+Version: 2016-02-08-7533a6243dc3ac5a747cf6ccbc4d0539dafd3e07
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: fstools
+Version: 2016-07-24-addd7dc21fe99f2701c1d4708071578052af401d
+Depends: libc, ubox
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: uclient-fetch
+Version: 2016-01-28-2e0918c7e0612449024caaaa8d44fb2d7a33f5f3
+Depends: libc, libuclient
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libuclient
+Version: 2016-01-28-2e0918c7e0612449024caaaa8d44fb2d7a33f5f3
+Depends: libc, libubox
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: luci-app-diag-core
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc
+Status: install user installed
+Architecture: all
+Installed-Time: 1479035641
+
+Package: uci
+Version: 2016-07-04.1-1
+Depends: libc, libuci
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: lua
+Version: 5.1.5-1
+Depends: libc, liblua
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: dropbear
+Version: 2016.74-1
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Conffiles:
+ /etc/dropbear/dropbear_rsa_host_key e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+ /etc/config/dropbear 0198dbc97b5a9aac76a5c6233684571ccdcc91fcb735e91c36d2b06a98158589
+Installed-Time: 1479035641
+
+Package: libustream-polarssl
+Version: 2016-07-02-ec80adaa1b47f28d426fa19c692011ce60b992d6
+Depends: libc, libubox, libpolarssl
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: mtd
+Version: 21
+Depends: libc, libubox
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: libjson-c
+Version: 0.12-1
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libgcc
+Version: 5.3.0-1
+Status: install hold installed
+Essential: yes
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: uboot-zynq-zed
+Version: 2016.07
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: libip6tc
+Version: 1.4.21-2
+Depends: libc, libxtables
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: luci-proto-ppp
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc
+Status: install user installed
+Architecture: all
+Installed-Time: 1479035641
+
+Package: libuuid
+Version: 2.28-1
+Depends: libc, librt
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: ppp
+Version: 2.4.7-9
+Depends: libc, kmod-ppp
+Status: install user installed
+Architecture: zynq
+Conffiles:
+ /etc/ppp/chap-secrets 6981fa176a79f8c12be5826c421b16253a616747018ba7e76752a9d36d1d51d4
+ /etc/ppp/filter 579583b318e0cff706ffc134620b42d3fbce8fc31aeb0ad7eea1cc859868e902
+ /etc/ppp/options a0509db666fc831a3f9332ca6e911ba9a32e7f1ce13733e539a719f0413794b9
+Installed-Time: 1479035641
+
+Package: luci-mod-admin-full
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc, luci-base
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: libubox
+Version: 2016-07-29-290c64ef5b5c3e75be851594f269d6a9568e64e5
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: luci-base
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc, lua, libuci-lua, luci-lib-nixio, luci-lib-ip, rpcd, libubus-lua, luci-lib-jsonc
+Status: install user installed
+Architecture: zynq
+Conffiles:
+ /etc/luci-uploads/.placeholder e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Installed-Time: 1479035641
+
+Package: eudev
+Version: 3.2-1
+Depends: libc, libblkid, librt, libudev
+Provides: udev
+Conflicts: udev
+Status: install user installed
+Architecture: zynq
+Conffiles:
+ /etc/udev/udev.conf e12e5813b019420f80791ac43238a26a2dbaca4daa0132400c044c29e421efe7
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: logd
+Version: 2016-07-19-aead2c0cbffdda9b46d74a998a4c6aeef423b21a
+Depends: libc, libubox, libubus, libblobmsg-json
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: librt
+Version: 1.1.15-1
+Depends: libpthread
+Status: install hold installed
+Essential: yes
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libjson-script
+Version: 2016-07-29-290c64ef5b5c3e75be851594f269d6a9568e64e5
+Depends: libc, libubox
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: luci-proto-ipv6
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc
+Status: install user installed
+Architecture: all
+Installed-Time: 1479035641
+
+Package: libblobmsg-json
+Version: 2016-07-29-290c64ef5b5c3e75be851594f269d6a9568e64e5
+Depends: libc, libjson-c, libubox
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: iptables
+Version: 1.4.21-2
+Depends: libc, kmod-ipt-core, libip4tc, libip6tc, libxtables
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: jshn
+Version: 2016-07-29-290c64ef5b5c3e75be851594f269d6a9568e64e5
+Depends: libc, libjson-c, libubox, libblobmsg-json
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: lm-sensors
+Version: 3.3.5-3
+Depends: libc, sysfsutils, libsensors
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1498188836
+
+Package: kmod-ipt-core
+Version: 4.4.14-1
+Depends: kernel (= 4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c), kmod-nf-ipt
+Status: install hold installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libpolarssl
+Version: 1.3.17-1
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: kmod-ppp
+Version: 4.4.14-1
+Depends: kernel (= 4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c), kmod-lib-crc-ccitt, kmod-slhc
+Status: install hold installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libubus
+Version: 2016-07-02-053be7df871e05478284235732f8b0608089512f
+Depends: libc, libubox
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: uhttpd
+Version: 2015-11-08-fe01ef3f52adae9da38ef47926cd50974af5d6b7
+Depends: libc, libubox, libblobmsg-json, libjson-script
+Status: install user installed
+Architecture: zynq
+Conffiles:
+ /etc/config/uhttpd 8942f860465c23336c6efa9fb0a86add8eb180702ca468d4b7b45dc05d86e2b6
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: kmod-nf-conntrack
+Version: 4.4.14-1
+Depends: kernel (= 4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c)
+Status: install hold installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: usign
+Version: 2016-07-04-ef6419142a3b0fbcddcccf536e3c1880302c6f89
+Depends: libc, libubox
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libxtables
+Version: 1.4.21-2
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: ip6tables
+Version: 1.4.21-2
+Depends: libc, kmod-ip6tables, iptables
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: libncursesw
+Version: 5.9-3
+Depends: libc, terminfo
+Provides: libncurses
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: zlib
+Version: 1.2.8-1
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: bitmicrotest
+Version: 2017-02-17
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1487749341
+
+Package: htop
+Version: 2.0.2-1
+Depends: libc, libncurses
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: kmod-nf-ipt6
+Version: 4.4.14-1
+Depends: kernel (= 4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c), kmod-nf-ipt, kmod-nf-conntrack6
+Status: install hold installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: luci-lib-nixio
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc, liblua
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: luci-i18n-base-zh-cn
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc, luci-base
+Status: install user installed
+Architecture: all
+Installed-Time: 1479035641
+
+Package: luci-lib-jsonc
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc, liblua, libjson-c
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: luci
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc, uhttpd, uhttpd-mod-ubus, luci-mod-admin-full, luci-theme-bootstrap, luci-app-firewall, luci-proto-ppp, libiwinfo-lua, luci-proto-ipv6
+Status: install user installed
+Architecture: all
+Installed-Time: 1479035641
+
+Package: kmod-nf-conntrack6
+Version: 4.4.14-1
+Depends: kernel (= 4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c), kmod-nf-conntrack
+Status: install hold installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: om-watchdog
+Version: 1-1
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: ubox
+Version: 2016-07-19-aead2c0cbffdda9b46d74a998a4c6aeef423b21a
+Depends: libc, libubox, ubusd, ubus, libubus, libuci
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: kernel
+Version: 4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c
+Depends: libc
+Status: install hold installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libnl-tiny
+Version: 0.1-5
+Depends: libc
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: px5g
+Version: 4
+Depends: libc, libpolarssl
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: uhttpd-mod-ubus
+Version: 2015-11-08-fe01ef3f52adae9da38ef47926cd50974af5d6b7
+Depends: libc, uhttpd, libubus, libblobmsg-json
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: luci-i18n-diag-core-zh-cn
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc, luci-app-diag-core
+Status: install user installed
+Architecture: all
+Installed-Time: 1479035641
+
+Package: jsonfilter
+Version: 2016-07-02-dea067ad67d977c247c300c06676a06adf21e0c7
+Depends: libc, libubox, libjson-c
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: libopenssl
+Version: 1.0.2j-1
+Depends: libc, zlib
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: kmod-slhc
+Version: 4.4.14-1
+Depends: kernel (= 4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c), kmod-lib-crc-ccitt
+Status: install hold installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+
+Package: luci-i18n-firewall-zh-cn
+Version: git-16.336.70424-1fd43b4-1
+Depends: libc, luci-app-firewall
+Status: install user installed
+Architecture: all
+Installed-Time: 1479035641
+
+Package: ppp-mod-pppoe
+Version: 2.4.7-9
+Depends: libc, kmod-pppoe
+Status: install user installed
+Architecture: zynq
+Installed-Time: 1479035641
+
+Package: kmod-ipt-nat
+Version: 4.4.14-1
+Depends: kernel (= 4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c), kmod-ipt-core, kmod-nf-nat
+Status: install hold installed
+Architecture: zynq
+Installed-Time: 1479035641
+Auto-Installed: yes
+

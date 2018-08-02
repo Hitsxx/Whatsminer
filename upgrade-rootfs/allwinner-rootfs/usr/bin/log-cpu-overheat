@@ -1,0 +1,6 @@
+#!/bin/sh
+
+temp=`cat /sys/devices/virtual/thermal/thermal_zone0/temp`
+echo "`date`|E012|Reboot control board|Kernel|Cpu overheat($temp C)" >> /root/.events/event-reboot-control-board
+echo "Cpu overheat($temp C)" >> /tmp/miner-state.log
+source /usr/bin/pre-reboot

@@ -1,0 +1,5 @@
+
+config power 'default'
+    option miner_type 'M6V10'
+    list 'power_limit' '4:000107:8:522:522:522'
+    list 'power_limit' '6:000022:1240:720:720:720:0:16400:15500:14700:600:1260:7:6'

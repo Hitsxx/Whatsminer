@@ -1,0 +1,4 @@
+
+config power 'default'
+    option miner_type 'M3V40'
+    list 'power_limit' '4:000107:15:684:684:684:0:11940:11460:10740:600:6:0:6'

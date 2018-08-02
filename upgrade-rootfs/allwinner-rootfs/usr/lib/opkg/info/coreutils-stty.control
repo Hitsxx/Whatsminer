@@ -1,0 +1,9 @@
+Package: coreutils-stty
+Version: 8.23-2
+Depends: libc, coreutils
+Source: feeds/packages/utils/coreutils
+Section: utils
+Maintainer: Jo-Philipp Wich <jo@mein.io>
+Architecture: sunxi
+Installed-Size: 24801
+Description:  Full version of standard GNU stty utility.

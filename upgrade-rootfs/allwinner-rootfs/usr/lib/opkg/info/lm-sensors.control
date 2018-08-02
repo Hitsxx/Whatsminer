@@ -1,0 +1,10 @@
+Package: lm-sensors
+Version: 3.3.5-3
+Depends: libc, sysfsutils, libsensors
+Source: feeds/packages/utils/lm-sensors
+License: GPL-2.0+ LGPL-2.1+
+Section: utils
+Maintainer: Jo-Philipp Wich <jo@mein.io>
+Architecture: sunxi
+Installed-Size: 6931
+Description:  utility to read hardware sensor data

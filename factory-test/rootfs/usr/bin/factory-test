@@ -1,0 +1,48 @@
+#!/bin/sh
+#
+# Factory test script.
+#
+# MicroBT Corp. 2017
+#
+# led-status:
+#
+#   0: red-off, green-on; 1: red-on, green-off;
+#   2: red-off, green-flash; 9: red-off, green-off
+#
+ 
+# Short key (S1)
+echo 9 > /sys/class/gpio/export
+echo in > /sys/class/gpio/gpio9/direction
+
+# Long key (S2)
+echo 10 > /sys/class/gpio/export
+echo in > /sys/class/gpio/gpio10/direction
+
+# Red LED
+echo 102 > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio102/direction
+
+# Green LED
+echo 103 > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio103/direction
+
+# LEDs flash 
+echo "9" > /tmp/led-status
+
+while true; do
+
+    key1=`cat /sys/class/gpio/gpio9/value`
+    key2=`cat /sys/class/gpio/gpio10/value`
+
+    if [ "$key1" = "0" ]; then
+	    echo "9" > /tmp/led-status
+	    /bin/test-readchipid > /tmp/test-readchipid.log
+    fi
+
+    if [ "$key2" = "0" ]; then
+	    echo "9" > /tmp/led-status
+	    /bin/test-hashboard > /tmp/test-hashboard.log
+    fi
+
+done
+

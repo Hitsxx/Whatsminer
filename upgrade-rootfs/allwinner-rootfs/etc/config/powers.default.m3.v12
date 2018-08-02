@@ -1,0 +1,7 @@
+
+config power 'default'
+    option miner_type 'M3V12'
+    list 'power_limit' '3:000106:16:582:582:582:0:10669:10028:9602:600:6:1:6'
+    list 'power_limit' '4:000107:9:636:636:636:0:11650:11000:10500:600:0:1:6'
+    list 'power_limit' '1:000004:5:576:576:576'
+    list 'power_limit' '2:000105:5:612:612:612'

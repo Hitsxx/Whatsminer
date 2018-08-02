@@ -1,0 +1,10 @@
+Package: uboot-envtools
+Version: 2015.10-1
+Depends: libc
+Source: package/boot/uboot-envtools
+License: GPL-2.0 GPL-2.0+
+LicenseFiles: Licenses/README
+Section: utils
+Architecture: zynq
+Installed-Size: 10523
+Description:  This package includes tools to read and modify U-Boot bootloader environment.

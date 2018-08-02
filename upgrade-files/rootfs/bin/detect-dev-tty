@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+# Auto detect dev_tty (/dev/ttySx)
+#
+
+source /usr/bin/detect-platform.sh
+
+control_board_type=$CONTROL_BOARD_PLATFORM
+
+gpio_hotplug0_path="/sys/class/gpio/gpio$HASH_PLUG_PIN0/value"
+gpio_hotplug1_path="/sys/class/gpio/gpio$HASH_PLUG_PIN1/value"
+gpio_hotplug2_path="/sys/class/gpio/gpio$HASH_PLUG_PIN2/value"
+
+gpio_hotplug0=`cat $gpio_hotplug0_path`
+gpio_hotplug1=`cat $gpio_hotplug1_path`
+gpio_hotplug2=`cat $gpio_hotplug2_path`
+
+if [ "${CONTROL_BOARD_PLATFORM:0:9}" = "ALLWINNER" ]; then
+    dev_tty="/dev/ttyS1"
+
+    if [ $gpio_hotplug1 = "0" ]; then
+        dev_tty="/dev/ttyS2"
+    fi
+
+    if [ $gpio_hotplug2 = "0" ]; then
+        dev_tty="/dev/ttyS3"
+    fi
+else
+    dev_tty="/dev/ttyS2"
+
+    if [ $gpio_hotplug1 = "0" ]; then
+        dev_tty="/dev/ttyS3"
+    fi
+
+    if [ $gpio_hotplug2 = "0" ]; then
+        dev_tty="/dev/ttyS4"
+    fi
+fi
+

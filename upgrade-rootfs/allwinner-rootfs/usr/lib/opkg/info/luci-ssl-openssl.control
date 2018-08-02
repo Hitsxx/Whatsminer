@@ -1,0 +1,8 @@
+Package: luci-ssl-openssl
+Version: git-17.136.70777-41d604f-1
+Depends: libc, luci, libustream-openssl, openssl-util
+Source: feeds/luci/collections/luci-ssl-openssl
+Section: luci
+Architecture: all
+Installed-Size: 104
+Description:  LuCI with OpenSSL as the SSL backend (libustream-openssl). OpenSSL cmd tools (openssl-util) are used by uhttpd for SSL key generation instead of the default px5g. (If px5g is installed, uhttpd will prefer that.)

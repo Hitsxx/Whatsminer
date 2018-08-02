@@ -1,0 +1,10 @@
+Package: kmod-ppp
+Version: 4.4.14-1
+Depends: kernel (=4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c), kmod-lib-crc-ccitt, kmod-slhc
+Source: package/kernel/linux
+License: GPLv2
+Section: kernel
+Status: unknown hold not-installed
+Architecture: zynq
+Installed-Size: 19251
+Description:  Kernel modules for PPP support

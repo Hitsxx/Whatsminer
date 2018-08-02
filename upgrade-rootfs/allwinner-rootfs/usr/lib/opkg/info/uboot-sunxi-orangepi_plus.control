@@ -1,0 +1,11 @@
+Package: uboot-sunxi-orangepi_plus
+Version: 2016.11
+Depends: libc
+Source: package/boot/uboot-sunxi
+License: GPL-2.0 GPL-2.0+
+LicenseFiles: Licenses/README
+Section: boot
+Maintainer: Zoltan HERPAI <wigyori@uid0.hu>
+Architecture: sunxi
+Installed-Size: 104
+Description:  U-Boot for Orange Pi Plus (H3)

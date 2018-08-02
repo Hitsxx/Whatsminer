@@ -1,0 +1,11 @@
+Package: zlib
+Version: 1.2.8-1
+Depends: libc
+Source: package/libs/zlib
+License: Zlib
+LicenseFiles: README
+Section: libs
+Architecture: zynq
+Installed-Size: 38518
+Description:  zlib is a lossless data-compression library.
+ This package includes the shared library.

@@ -1,0 +1,10 @@
+Package: libuci-lua
+Version: 2016-07-04.1-1
+Depends: libc, libuci, liblua
+Source: package/system/uci
+License: LGPL-2.1
+Section: libs
+Maintainer: Felix Fietkau <nbd@nbd.name>
+Architecture: zynq
+Installed-Size: 5759
+Description:  Lua plugin for UCI

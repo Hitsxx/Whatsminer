@@ -1,0 +1,202 @@
+#!/bin/sh
+
+# This file is for cron job
+
+# Functions definitions
+
+find_field() {
+    OLD_IFS="$IFS" 
+    IFS="," 
+    for s in $1
+    do 
+        v=`echo "$s" | grep "$2"`
+        if [ "$v" != "" ]; then
+            IFS="$OLD_IFS"
+            echo "$v"
+            break
+        fi
+    done
+    IFS="$OLD_IFS"
+    echo ""
+}
+
+reboot_control_board() {
+    sleep 5 && reboot -n -f &
+    reboot
+}
+
+kill_cgminer() {
+    killall -s 9 cgminer
+    sleep 2
+
+    C=`pidof cgminer | wc -w`
+    if [ "$C" != "0" ]; then
+        logger "`date`|E012|Reboot control board|cgminer-monitor|cgminer may be zombie or in uninterruptible sleep"
+        echo "`date`|E012|Reboot control board|cgminer-monitor|cgminer may be zombie or in uninterruptible sleep" >> /root/.events/event-reboot-control-board
+
+        reboot_control_board
+    fi
+}
+
+miner_thread_count() {
+    cgminer_pid=`pidof cgminer`
+    thread_count=`grep Miner /proc/$cgminer_pid/task/*/comm | wc -w`
+    echo $thread_count
+}
+
+pools_active() {
+    is_active=`cgminer-api -o pools  | grep 'Stratum Active=true'`
+    if [ "$is_active" = "" ]; then
+        echo false
+    else
+        echo true
+    fi
+}
+
+get_max_chip_model_effective_count() {
+    local max=0
+    local count
+
+    for board in "$ASC0" "$ASC1" "$ASC2"
+    do
+        field=`find_field "$board" "Effective Chips"`
+        count=`echo $field | cut -d "=" -f2`
+        if [ "$count" -gt "$max" ]; then
+            max=$count
+        fi
+    done
+    return $max
+}
+
+cgminer_api_summary_accepted() {
+    local cgminer_api_summary=`cgminer-api -o summary`
+    local summary=`echo $cgminer_api_summary | cut -d "|" -f2`
+    local accepted_field=`find_field "$summary" "Accepted"`
+    local accepted=`echo $accepted_field | cut -d "=" -f2`
+    echo $accepted
+}
+
+need_restart_cgminer_with_alternative_configs() {
+    local need_restart_cgminer=0
+
+    if [ ! -f /tmp/alternative_miner_type ]; then
+        return 0
+    fi
+
+    local alternative_miner_chip_num=`cat /tmp/alternative_miner_chip_num`
+    local bitmicro_options=`uci get cgminer.default.bitmicro_options`
+    local current_miner_chip_num=`echo $bitmicro_options|cut -d ":" -f3`
+    get_max_chip_model_effective_count
+    local max_effective_chip_count=$?
+
+    # Maybe M3(66 chips) misjudges to M2(38 chips)
+    if [ "$max_effective_chip_count" -eq "$current_miner_chip_num" ] &&
+        [ "$max_effective_chip_count" -lt "$alternative_miner_chip_num" ] &&
+        [ "$(cgminer_api_summary_accepted)" -eq 0 ]; then
+            logger "Miner type may be wrong, as accepted work is 0, detect again after 60s"
+            sleep 60
+            if [ "$(cgminer_api_summary_accepted)" -eq 0 ]; then
+                need_restart_cgminer=1
+            fi
+            logger "Accepted work:$(cgminer_api_summary_accepted)"
+    fi
+
+    # Maybe M1s(60 chips) misjudges to M1(66 chips)
+    if [ "$max_effective_chip_count" -lt "$current_miner_chip_num" ] &&
+        [ "$max_effective_chip_count" -eq "$alternative_miner_chip_num" ]; then
+            need_restart_cgminer=1
+    fi
+    logger "max_effective_chip_count:$max_effective_chip_count alternative_miner_chip_num:$alternative_miner_chip_num current_miner_chip_num:$current_miner_chip_num" 
+    return $need_restart_cgminer
+}
+
+restart_cgminer_with_alternative_configs() {
+    local miner_type=`cat /tmp/alternative_miner_type`
+    logger "Restart cgminer using miner type $miner_type, as current miner type is probably wrong."
+    /etc/init.d/detect-cgminer-config start "$miner_type"
+ 
+    rm /tmp/miner-info
+    detect-miner-info "$miner_type"
+    rm /tmp/lua-version
+    lua-detect-version "$miner_type"
+
+    /etc/init.d/cgminer restart
+}
+
+source /usr/bin/detect-platform.sh
+
+# Make sure there is only one cgminer running
+C=`pidof cgminer | wc -w`
+if [ "$C" = "0" ]; then
+    exit 0;
+fi
+if [ "$C" != "1" ]; then
+    logger "There are more than one($C) cgminer processes, show details and detect again"
+    ps | grep cgminer | grep -v grep > /tmp/cgminers
+    cgminers=`cat /tmp/cgminers`
+
+    sleep 1
+    C1=`pidof cgminer | wc -w`
+    logger "ps cgminer($C1): $cgminers"
+
+    if [ "$C1" != "1" ]; then
+        logger "Kill all cgminers as there are more than one($C1) cgminer processes"
+
+        kill_cgminer
+        /etc/init.d/cgminer start
+        exit 0;
+    fi
+    logger "Only one cgminer process again, do nothing"
+fi
+
+# Make sure cgminer started
+if [ ! -f /tmp/cgminer-ntpd-done ]; then
+    exit 0;
+fi
+
+# Make sure cgminer still active
+cpu_ratio=`top -n1 | grep "cgminer --bitmicro-options" | grep -v grep | awk '{print $8}' | sed 's/%//g'`
+if [ $cpu_ratio -eq 0 ]; then
+    # Check twice
+    cpu_ratio=`top -d5 -n2 | grep "cgminer --bitmicro-options" | grep -v grep | awk '{print $8}' | sed 's/%//g' | sed -n '2p'`
+    if [ $cpu_ratio -eq 0 ]; then
+        kill_cgminer
+        /etc/init.d/cgminer start
+
+        logger "cgminer-monitor cpu ratio=0%, cgminer restarted at `date`"
+        echo "cgminer-monitor cpu ratio=0%, cgminer restarted at `date`" >> /tmp/cgminer-restart.log
+        echo "`date`|E008|Restart cgminer|cgminer-monitor|CPU percent is 0" >> /tmp/event-restart-cgminer
+        exit 0;
+    fi
+fi
+
+if [ $(miner_thread_count) = 0 ]; then
+    sleep 15
+    if [ $(miner_thread_count) = 0 ]; then
+        logger "cgminer-monitor Miner thread isn't present, cgminer restarted at `date`"
+
+        kill_cgminer
+        /etc/init.d/cgminer start
+    fi
+fi
+
+if [ $(pools_active) = false ]; then
+    logger "Pools aren't active, waiting..."
+    exit 0;
+fi
+
+# API edevs
+cgminer_api_edevs=`/usr/bin/cgminer-api -o edevs`
+if [ "$?" != "0" ]; then
+    exit 0;
+fi
+
+STATUS=`echo $cgminer_api_edevs | cut -d "|" -f1`
+ASC0=`echo $cgminer_api_edevs | cut -d "|" -f2`
+ASC1=`echo $cgminer_api_edevs | cut -d "|" -f3`
+ASC2=`echo $cgminer_api_edevs | cut -d "|" -f4`
+
+need_restart_cgminer_with_alternative_configs
+if [ $? -eq 1 ]; then
+    restart_cgminer_with_alternative_configs
+fi

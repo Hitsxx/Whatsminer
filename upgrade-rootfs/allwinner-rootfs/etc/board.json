@@ -1,0 +1,12 @@
+{
+	"model": {
+		"id": "generic",
+		"name": "Generic sunxi board"
+	},
+	"network": {
+		"lan": {
+			"ifname": "eth0",
+			"protocol": "static"
+		}
+	}
+}

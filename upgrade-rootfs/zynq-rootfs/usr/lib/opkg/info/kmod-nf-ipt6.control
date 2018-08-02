@@ -1,0 +1,10 @@
+Package: kmod-nf-ipt6
+Version: 4.4.14-1
+Depends: kernel (=4.4.14-1-ea0a5483a3b1ffddb58e376c9335952c), kmod-nf-ipt, kmod-nf-conntrack6
+Source: package/kernel/linux
+License: GPLv2
+Section: kernel
+Status: unknown hold not-installed
+Architecture: zynq
+Installed-Size: 8132
+Description:  Ip6tables core

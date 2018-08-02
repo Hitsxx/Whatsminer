@@ -1,0 +1,10 @@
+Package: libsensors
+Version: 3.3.5-3
+Depends: libc, sysfsutils
+Source: feeds/packages/utils/lm-sensors
+License: GPL-2.0+ LGPL-2.1+
+Section: libs
+Maintainer: Jo-Philipp Wich <jo@mein.io>
+Architecture: sunxi
+Installed-Size: 58830
+Description:  lm-sensors libraries

@@ -1,0 +1,7 @@
+DISTRIB_ID='OpenWrt'
+DISTRIB_RELEASE='Bleeding Edge'
+DISTRIB_REVISION='50046'
+DISTRIB_CODENAME='designated_driver'
+DISTRIB_TARGET='sunxi/generic'
+DISTRIB_DESCRIPTION='OpenWrt Designated Driver 50046'
+DISTRIB_TAINTS='no-all no-ipv6'

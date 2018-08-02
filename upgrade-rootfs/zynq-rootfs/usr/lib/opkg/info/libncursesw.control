@@ -1,0 +1,11 @@
+Package: libncursesw
+Version: 5.9-3
+Depends: libc, terminfo
+Provides: libncurses
+Source: package/libs/ncurses
+License: MIT
+LicenseFiles: README
+Section: libs
+Architecture: zynq
+Installed-Size: 132392
+Description:  Terminal handling library (Unicode)

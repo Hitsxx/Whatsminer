@@ -1,0 +1,18 @@
+#!/bin/sh /etc/rc.common
+#
+# Copyright (C) 2011 OpenWrt.org
+#
+
+START=99
+STOP=10
+
+USE_PROCD=1
+NAME=factory-test
+PROG=/usr/bin/factory-test
+
+start_service() {
+	procd_open_instance
+	procd_set_param command "${PROG}" 
+	procd_set_param respawn
+	procd_close_instance
+}

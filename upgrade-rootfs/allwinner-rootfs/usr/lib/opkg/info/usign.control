@@ -1,0 +1,10 @@
+Package: usign
+Version: 2016-07-04-ef6419142a3b0fbcddcccf536e3c1880302c6f89
+Depends: libc, libubox
+Source: package/system/usign
+License: ISC
+Section: base
+Maintainer: Felix Fietkau <nbd@nbd.name>
+Architecture: sunxi
+Installed-Size: 10389
+Description:  OpenWrt signature verification utility

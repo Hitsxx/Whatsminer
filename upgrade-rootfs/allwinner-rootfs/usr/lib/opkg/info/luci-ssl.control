@@ -1,0 +1,8 @@
+Package: luci-ssl
+Version: git-17.136.70777-41d604f-1
+Depends: libc, luci, libustream-mbedtls, px5g
+Source: feeds/luci/collections/luci-ssl
+Section: luci
+Architecture: all
+Installed-Size: 104
+Description:  LuCI with HTTPS support (mbedTLS as SSL backend)
