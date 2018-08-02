@@ -1,0 +1,2 @@
+# Whatsminer
+upgrade-whatsminer-master
